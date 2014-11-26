@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Storext::VERSION
   s.authors     = ["G5", "Ramon Tayag", "Marc Rendl Ignacio"]
   s.email       = ["lateam@getg5.com", "ramon.tayag@gmail.com", "marcrendlignacio@gmail.com"]
-  s.homepage    = "TODO"
+  s.homepage    = "http://github.com/g5/storext"
   s.summary     = "Extends ActiveRecord::Store.store_accessor"
   s.description = "Extends ActiveRecord::Store.store_accessor"
   s.license     = "MIT"

@@ -1,0 +1,12 @@
+default: &default
+  adapter: postgres
+  username: user
+  password: pass
+
+development:
+  <<: *default
+  database: storext_development
+
+test:
+  <<: *default
+  database: storext_test

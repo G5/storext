@@ -66,9 +66,9 @@ Note on `Axion::Types::Boolean`: when defining Boolean attributes, you **have to
 
 ## How to run the test suite
 
-```
-rspec spec
-```
+1. Copy and edit `spec/dummy/config/database.yml.sample` to `spec/dummy/config/database.yml` to fit your own PostgreSQL databases
+2. From `spec/dummy`, `rake db:migrate db:test:prepare`
+2. From the root dir of the gem, `rspec spec`
 
 ## License
 

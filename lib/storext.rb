@@ -1,0 +1,2 @@
+module Storext
+end

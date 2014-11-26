@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     storext (0.0.1)
-      rails (~> 4.1.7)
+      rails (~> 4.0)
 
 GEM
   remote: https://rubygems.org/

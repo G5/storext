@@ -12,9 +12,9 @@ module Storext
 
   private
 
-  def storext_proxy
-    return @storext_proxy if @storext_proxy
-    @storext_proxy ||= self.class.storext_proxy_class.new
+  def storext_cast_proxy
+    return @storext_cast_proxy if @storext_cast_proxy
+    @storext_cast_proxy ||= self.class.storext_cast_proxy_class.new
   end
 
   module ClassMethods
@@ -22,18 +22,20 @@ module Storext
       store_attribute_defs[column] ||= []
       store_attribute_defs[column] << attr
 
-      storext_proxy_class.attribute "_casted_#{attr}", type, opts
+      storext_cast_proxy_class.attribute "_casted_#{attr}", type, opts
 
       define_method "#{attr}=" do |value|
-        storext_proxy.send("_casted_#{attr}=", value)
-        write_store_attribute column, attr, storext_proxy.send("_casted_#{attr}")
+        storext_cast_proxy.send("_casted_#{attr}=", value)
+        write_store_attribute(column,
+                              attr,
+                              storext_cast_proxy.send("_casted_#{attr}"))
       end
 
       define_method attr do
         if store_val = read_store_attribute(column, attr)
-          storext_proxy.send("_casted_#{attr}=", store_val)
+          storext_cast_proxy.send("_casted_#{attr}=", store_val)
         end
-        storext_proxy.send("_casted_#{attr}")
+        storext_cast_proxy.send("_casted_#{attr}")
       end
 
       store_accessor column, *store_attribute_defs[column]
@@ -44,8 +46,8 @@ module Storext
         define_store_attribute
     end
 
-    def storext_proxy_class
-      @storext_proxy_class ||= Class.new do
+    def storext_cast_proxy_class
+      @storext_cast_proxy_class ||= Class.new do
         include Virtus.model
       end
     end

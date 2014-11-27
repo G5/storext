@@ -24,6 +24,17 @@ describe Storext do
       expect(book.hardcover).to be true
       expect(book.alt_name).to eq "Something"
     end
+
+    it "allows definitions of `name`" do
+      author = Author.new(name: "A. Clarke")
+      expect(author.name).to eq "A. Clarke"
+    end
+  end
+
+  it "does not leak definitions into other classes" do
+    author = Author.new(name: "A. Clarke")
+    book = Book.new
+    expect(book).to_not respond_to(:name)
   end
 
 end

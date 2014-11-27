@@ -40,20 +40,29 @@ module Storext
     end
 
     def store_attributes(column, &block)
-      storext_proxy_class.define_store_attributes self, column, &block
+      storext_attribute_proxy_class.new(self, column, &block).
+        define_store_attribute
     end
 
     def storext_proxy_class
       @storext_proxy_class ||= Class.new do
         include Virtus.model
+      end
+    end
 
-        def self.define_store_attributes(source_class, column, &block)
+    def storext_attribute_proxy_class
+      @storext_attribute_proxy_class ||= Class.new do
+        def initialize(source_class, column, &block)
           @source_class = source_class
           @column = column
-          instance_eval &block
+          @block = block
         end
 
-        def self.method_missing(method_name, *args, &block)
+        def define_store_attribute
+          instance_eval &@block
+        end
+
+        def method_missing(method_name, *args, &block)
           @source_class.store_attribute @column, method_name, *args
         end
       end

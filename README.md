@@ -35,18 +35,16 @@ class Book < ActiveRecord::Base
   store_attributes :data do
     author String
     title String, default: "Great Voyage"
-    available Axiom::Types::Boolean, default: true
+    available Boolean, default: true
     copies Integer, default: 0
   end
 
   # Or you can define attributes like this:
-  store_attribute :data, :hardcover, Axiom::Types::Boolean
+  store_attribute :data, :hardcover, Boolean
   store_attribute :data, :alt_name
 
 end
 ```
-
-Note on `Axion::Types::Boolean`: when defining Boolean attributes, you **have to give the fully qualified class name**. Virtus normally allows you to just put `Boolean`, but because of the way we are not using Virtus directly on the model that includes the Storext module, `Boolean` isn't visible.
 
 ## How to run the test suite
 

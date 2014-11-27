@@ -10,12 +10,18 @@ module Storext
   included do
     class_attribute :store_attribute_defs
     self.store_attribute_defs = {}
+
+    unless defined?(self::Boolean)
+      self::Boolean = ::Axiom::Types::Boolean
+    end
   end
 
   private
 
   def storext_cast_proxy
-    return @storext_cast_proxy if @storext_cast_proxy
+    if @storext_cast_proxy
+      return @storext_cast_proxy
+    end
     @storext_cast_proxy ||= self.class.storext_cast_proxy_class.new
   end
 

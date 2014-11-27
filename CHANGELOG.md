@@ -1,3 +1,7 @@
+# TBA
+
+- Allow defining of type `Boolean` instead of `Axiom::Types::Boolean`
+
 # 0.0.2
 
 - Fix issue when defining `name` store attribute

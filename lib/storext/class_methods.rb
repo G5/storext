@@ -23,6 +23,9 @@ module Storext
       track_store_attribute(column, attr)
 
       storext_cast_proxy_class.attribute "_casted_#{attr}", type, opts
+      unless storext_cast_proxy_class.instance_methods.include? :"_casted_#{attr}"
+        raise ArgumentError, "problem defining `#{attr}`. `#{type}` may not be a valid type."
+      end
 
       storext_define_writer(column, attr)
       storext_define_reader(column, attr)

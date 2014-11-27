@@ -37,4 +37,44 @@ describe Storext do
     expect(book).to_not respond_to(:name)
   end
 
+  context "class that include Storext does not have Boolean defined" do
+    it "allows using `Boolean` type" do
+      book = Book.new(hardcover: true)
+      expect(book.hardcover).to be true
+    end
+  end
+
+  context "class that includes Storext has boolean defined" do
+    it "does not override Boolean" do
+      bad_author_class = Class.new(ActiveRecord::Base) do
+        self.table_name = "authors"
+        self::Boolean = "Something"
+
+        include Storext
+        store_attributes :data do
+          name String
+        end
+      end
+      expect(bad_author_class::Boolean).to eq "Something"
+    end
+
+    it "raises an error to warn the developer" do
+      expect {
+        bad_author_class = Class.new(ActiveRecord::Base) do
+          self.table_name = "authors"
+          Boolean = "Something"
+
+          include Storext
+          store_attributes :data do
+            name String
+            alive Boolean
+          end
+        end
+      }.to raise_error(
+        ArgumentError,
+        "problem defining `alive`. `Something` may not be a valid type.",
+      )
+    end
+  end
+
 end

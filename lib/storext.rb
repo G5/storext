@@ -14,9 +14,30 @@ module Storext
     unless defined?(self::Boolean)
       self::Boolean = ::Axiom::Types::Boolean
     end
+
+    after_initialize :set_storext_defaults
   end
 
+
   private
+
+  def set_storext_defaults
+    store_attribute_defs.each do |store_column, store_keys|
+      store_keys.each do |store_key|
+        set_storext_default_for(store_column, store_key)
+      end
+    end
+  end
+
+  def set_storext_default_for(column, key)
+    if self.send(column).nil? || !self.send(column).has_key?(key.to_s)
+      write_store_attribute(column, key, default_store_value(key))
+    end
+  end
+
+  def default_store_value(key)
+    storext_cast_proxy.send("_casted_#{key}")
+  end
 
   def storext_cast_proxy
     if @storext_cast_proxy

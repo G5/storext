@@ -11,3 +11,18 @@ Rails.backtrace_cleaner.remove_silencers!
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+RSpec.configure do |c|
+  c.before :suite do
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  c.before do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.start
+  end
+
+  c.after do
+    DatabaseCleaner.clean
+  end
+end

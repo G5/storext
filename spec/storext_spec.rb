@@ -77,4 +77,21 @@ describe Storext do
     end
   end
 
+  it "creates the records with defaults set" do
+    Book.create
+    expect(Book.where("data -> 'title' = 'Great Voyage'")).to_not be_empty
+  end
+
+  it "initializes the records with defaults set" do
+    expect(Book.new.title).to eq('Great Voyage')
+    expect(Book.new.diff_hstore_attr).to eq('some value')
+  end
+
+  it "defaults do not override already set values" do
+    book = Book.create(title: nil)
+    expect(book.title).to be_nil
+    book = Book.last
+    expect(book.title).to be_nil
+  end
+
 end

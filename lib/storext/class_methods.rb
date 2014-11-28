@@ -4,15 +4,15 @@ module Storext
     def storext_define_writer(column, attr)
       define_method "#{attr}=" do |value|
         storext_cast_proxy.send("_casted_#{attr}=", value)
-        write_store_attribute(column,
-                              attr,
-                              storext_cast_proxy.send("_casted_#{attr}"))
+        send("#{column}=", send(column) || {})
+        send(column)[attr.to_s] = storext_cast_proxy.send("_casted_#{attr}")
       end
     end
 
     def storext_define_reader(column, attr)
       define_method attr do
-        if store_val = read_store_attribute(column, attr)
+        if send(column) && send(column).has_key?(attr.to_s)
+          store_val = read_store_attribute(column, attr)
           storext_cast_proxy.send("_casted_#{attr}=", store_val)
         end
         storext_cast_proxy.send("_casted_#{attr}")

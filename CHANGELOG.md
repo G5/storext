@@ -1,4 +1,4 @@
-# TBA
+# 0.1.1
 
 - Fix: defaults are now set when an object is created
 

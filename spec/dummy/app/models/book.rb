@@ -9,5 +9,6 @@ class Book < ActiveRecord::Base
   end
   store_attribute :data, :hardcover, Boolean
   store_attribute :data, :alt_name
+  store_attribute :another_hstore, :diff_hstore_attr, String, default: 'some value'
 
 end

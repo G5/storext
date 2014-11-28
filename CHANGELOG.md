@@ -1,3 +1,7 @@
+# TBA
+
+- Fix: defaults are now set when an object is created
+
 # 0.1.0
 
 - Allow defining of type `Boolean` instead of `Axiom::Types::Boolean`

@@ -11,6 +11,11 @@ module Storext
     class_attribute :store_attribute_defs
     self.store_attribute_defs = {}
 
+    class_attribute :storext_cast_proxy_class
+    self.storext_cast_proxy_class = Class.new do
+      include Virtus.model
+    end
+
     unless defined?(self::Boolean)
       self::Boolean = ::Axiom::Types::Boolean
     end

@@ -94,4 +94,11 @@ describe Storext do
     expect(book.title).to be_nil
   end
 
+  context "`include Storext` is in the parent class" do
+    it "does not blow up" do
+      expect(Book.new.title).to eq "Great Voyage"
+      expect(PocketBook.new.soft).to be true
+    end
+  end
+
 end

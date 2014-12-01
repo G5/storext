@@ -42,11 +42,5 @@ module Storext
       store_attribute_defs[column] << attr
     end
 
-    def storext_cast_proxy_class
-      @storext_cast_proxy_class ||= Class.new do
-        include Virtus.model
-      end
-    end
-
   end
 end

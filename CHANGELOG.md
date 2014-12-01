@@ -1,4 +1,4 @@
-# TBA
+# 0.1.3
 
 - Fix discrepancy when setting attributes when creating and updating
 

@@ -103,4 +103,17 @@ describe Storext do
     end
   end
 
+  it "properly saves data in the store column during creation" do
+    book = Book.create(title: "Rarara")
+    expect(Book.where("data -> 'title' = 'Rarara'")).to_not be_empty
+  end
+
+  it "property saves data in the store column during updates" do
+    book = Book.create(title: "Rarara")
+    book.title = "Sis boom ba"
+    book.save
+    expect(Book.where("data -> 'title' = 'Sis boom ba'")).to_not be_empty
+    expect(Book.last.title).to eq "Sis boom ba"
+  end
+
 end

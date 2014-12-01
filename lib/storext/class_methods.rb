@@ -5,7 +5,10 @@ module Storext
       define_method "#{attr}=" do |value|
         storext_cast_proxy.send("_casted_#{attr}=", value)
         send("#{column}=", send(column) || {})
-        send(column)[attr.to_s] = storext_cast_proxy.send("_casted_#{attr}")
+
+        attr_value = storext_cast_proxy.send("_casted_#{attr}")
+        write_store_attribute column, attr, value
+        send(column)[attr.to_s] = value
       end
     end
 

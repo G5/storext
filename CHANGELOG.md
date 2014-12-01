@@ -1,3 +1,7 @@
+# TBA
+
+- Fix discrepancy when setting attributes when creating and updating
+
 # 0.1.2
 
 - Fix: errors that show up when `include Storext` is in parent

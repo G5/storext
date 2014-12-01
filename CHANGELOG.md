@@ -1,4 +1,4 @@
-# TBA
+# 0.1.2
 
 - Fix: errors that show up when `include Storext` is in parent
 

@@ -98,6 +98,8 @@ describe Storext do
     it "does not blow up" do
       expect(Book.new.title).to eq "Great Voyage"
       expect(PocketBook.new.soft).to be true
+      expect(Book.new).to_not respond_to :soft
+      expect(PocketBook.new.title).to eq 1
     end
   end
 

@@ -1,5 +1,8 @@
 class PocketBook < Book
 
-  store_attribute :data, :soft, Boolean, default: true
+  store_attributes :data do
+    soft Boolean, default: true
+    title Integer, default: 1
+  end
 
 end

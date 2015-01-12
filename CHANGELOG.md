@@ -1,3 +1,7 @@
+# TBA
+
+- Fix overwriting of attributes in classes that share the same ancestor
+
 # 0.1.3
 
 - Fix discrepancy when setting attributes when creating and updating

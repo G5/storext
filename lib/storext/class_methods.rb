@@ -3,10 +3,10 @@ module Storext
 
     def storext_define_writer(column, attr)
       define_method "#{attr}=" do |value|
-        storext_cast_proxy.send("_casted_#{attr}=", value)
+        storext_cast_proxy(attr).send("_casted_#{attr}=", value)
         send("#{column}=", send(column) || {})
 
-        attr_value = storext_cast_proxy.send("_casted_#{attr}")
+        attr_value = storext_cast_proxy(attr).send("_casted_#{attr}")
         write_store_attribute column, attr, value
         send(column)[attr.to_s] = value
       end
@@ -16,15 +16,16 @@ module Storext
       define_method attr do
         if send(column) && send(column).has_key?(attr.to_s)
           store_val = read_store_attribute(column, attr)
-          storext_cast_proxy.send("_casted_#{attr}=", store_val)
+          storext_cast_proxy(attr).send("_casted_#{attr}=", store_val)
         end
-        storext_cast_proxy.send("_casted_#{attr}")
+        storext_cast_proxy(attr).send("_casted_#{attr}")
       end
     end
 
     def store_attribute(column, attr, type=nil, opts={})
-      track_store_attribute(column, attr)
+      track_store_attribute(column, attr, type, opts)
 
+      storext_cast_proxy_class = Class.new { include Virtus.model }
       storext_cast_proxy_class.attribute "_casted_#{attr}", type, opts
       unless storext_cast_proxy_class.instance_methods.include? :"_casted_#{attr}"
         raise ArgumentError, "problem defining `#{attr}`. `#{type}` may not be a valid type."
@@ -33,16 +34,25 @@ module Storext
       storext_define_writer(column, attr)
       storext_define_reader(column, attr)
 
-      store_accessor column, *store_attribute_defs[column]
+      attrs = []
+      store_attribute_defs.each do |key, definition|
+        attrs << key if definition[:column] == column
+      end
+      store_accessor column, *attrs
     end
 
     def store_attributes(column, &block)
       AttributeProxy.new(self, column, &block).define_store_attribute
     end
 
-    def track_store_attribute(column, attr)
-      store_attribute_defs[column] ||= []
-      store_attribute_defs[column] << attr
+    def track_store_attribute(column, attr, type, opts)
+      self.store_attribute_defs = self.store_attribute_defs.dup
+
+      store_attribute_defs[attr] = {
+        column: column,
+        type: type,
+        opts: opts,
+      }
     end
 
   end

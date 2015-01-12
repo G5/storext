@@ -101,6 +101,14 @@ describe Storext do
       expect(Book.new).to_not respond_to :soft
       expect(PocketBook.new.title).to eq 1
     end
+
+    it "does not overwrite the stored attribute settings" do
+      # Because of Rails' autoloading, we have to load SmartPhone first
+      SmartPhone
+      expect(Phone.new.number).to eq "222"
+      expect(FeaturePhone.new.number).to be_nil
+      expect(SmartPhone.new.number).to eq "111"
+    end
   end
 
   it "properly saves data in the store column during creation" do

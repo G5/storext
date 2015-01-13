@@ -45,6 +45,8 @@ module Storext
       AttributeProxy.new(self, column, &block).define_store_attribute
     end
 
+    private
+
     def track_store_attribute(column, attr, type, opts)
       self.store_attribute_defs = self.store_attribute_defs.dup
 

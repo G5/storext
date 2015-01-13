@@ -25,11 +25,7 @@ module Storext
     def store_attribute(column, attr, type=nil, opts={})
       track_store_attribute(column, attr, type, opts)
 
-      storext_cast_proxy_class = Class.new { include Virtus.model }
-      storext_cast_proxy_class.attribute "_casted_#{attr}", type, opts
-      unless storext_cast_proxy_class.instance_methods.include? :"_casted_#{attr}"
-        raise ArgumentError, "problem defining `#{attr}`. `#{type}` may not be a valid type."
-      end
+      storext_check_attr_validity(attr, type, opts)
 
       storext_define_accessor(column, attr)
 
@@ -63,6 +59,14 @@ module Storext
         type: type,
         opts: opts,
       }
+    end
+
+    def storext_check_attr_validity(attr, type, opts)
+      storext_cast_proxy_class = Class.new { include Virtus.model }
+      storext_cast_proxy_class.attribute "_casted_#{attr}", type, opts
+      unless storext_cast_proxy_class.instance_methods.include? :"_casted_#{attr}"
+        raise ArgumentError, "problem defining `#{attr}`. `#{type}` may not be a valid type."
+      end
     end
 
   end

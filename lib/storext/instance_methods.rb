@@ -16,7 +16,7 @@ module Storext
     end
 
     def default_store_value(attr)
-      storext_cast_proxy(attr).send("_casted_#{attr}")
+      storext_cast_proxy(attr).send("casted_attr")
     end
 
     def storext_cast_proxy(attr)
@@ -30,7 +30,7 @@ module Storext
         end
 
         klass.attribute(
-          "_casted_#{attr}",
+          "casted_attr",
           self.class.store_attribute_defs[attr][:type],
           self.class.store_attribute_defs[attr][:opts],
         )

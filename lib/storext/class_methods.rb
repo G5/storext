@@ -3,10 +3,10 @@ module Storext
 
     def storext_define_writer(column, attr)
       define_method "#{attr}=" do |value|
-        storext_cast_proxy(attr).send("_casted_#{attr}=", value)
+        storext_cast_proxy(attr).send("casted_attr=", value)
         send("#{column}=", send(column) || {})
 
-        attr_value = storext_cast_proxy(attr).send("_casted_#{attr}")
+        attr_value = storext_cast_proxy(attr).send("casted_attr")
         write_store_attribute column, attr, value
         send(column)[attr.to_s] = value
       end
@@ -16,9 +16,9 @@ module Storext
       define_method attr do
         if send(column) && send(column).has_key?(attr.to_s)
           store_val = read_store_attribute(column, attr)
-          storext_cast_proxy(attr).send("_casted_#{attr}=", store_val)
+          storext_cast_proxy(attr).send("casted_attr=", store_val)
         end
-        storext_cast_proxy(attr).send("_casted_#{attr}")
+        storext_cast_proxy(attr).send("casted_attr")
       end
     end
 
@@ -60,8 +60,8 @@ module Storext
 
     def storext_check_attr_validity(attr, type, opts)
       storext_cast_proxy_class = Class.new { include Virtus.model }
-      storext_cast_proxy_class.attribute "_casted_#{attr}", type, opts
-      unless storext_cast_proxy_class.instance_methods.include? :"_casted_#{attr}"
+      storext_cast_proxy_class.attribute "casted_attr", type, opts
+      unless storext_cast_proxy_class.instance_methods.include? :"casted_attr"
         raise ArgumentError, "problem defining `#{attr}`. `#{type}` may not be a valid type."
       end
     end

@@ -42,8 +42,8 @@ module Storext
 
     def storext_attrs_for(column)
       attrs = []
-      store_attribute_defs.each do |key, definition|
-        attrs << key if definition[:column] == column
+      store_attribute_defs.each do |attr, definition|
+        attrs << attr if definition[:column] == column
       end
       attrs
     end

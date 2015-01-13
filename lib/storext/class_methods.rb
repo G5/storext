@@ -31,14 +31,14 @@ module Storext
         raise ArgumentError, "problem defining `#{attr}`. `#{type}` may not be a valid type."
       end
 
+      storext_define_accessor(column, attr)
+
+      store_accessor column, *storext_attrs_for(column)
+    end
+
+    def storext_define_accessor(column, attr)
       storext_define_writer(column, attr)
       storext_define_reader(column, attr)
-
-      attrs = []
-      store_attribute_defs.each do |key, definition|
-        attrs << key if definition[:column] == column
-      end
-      store_accessor column, *attrs
     end
 
     def store_attributes(column, &block)
@@ -46,6 +46,14 @@ module Storext
     end
 
     private
+
+    def storext_attrs_for(column)
+      attrs = []
+      store_attribute_defs.each do |key, definition|
+        attrs << key if definition[:column] == column
+      end
+      attrs
+    end
 
     def track_store_attribute(column, attr, type, opts)
       self.store_attribute_defs = self.store_attribute_defs.dup

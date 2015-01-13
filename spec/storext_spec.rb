@@ -111,6 +111,12 @@ describe Storext do
     end
   end
 
+  context "when no attributes defined" do
+    it "keeps the column nil, like ActiveRecord does with `store_accessor`" do
+      expect(Car.new.data).to be_nil
+    end
+  end
+
   it "properly saves data in the store column during creation" do
     book = Book.create(title: "Rarara")
     expect(Book.where("data -> 'title' = 'Rarara'")).to_not be_empty

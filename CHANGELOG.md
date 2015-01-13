@@ -1,3 +1,7 @@
+# TBA
+
+- Ensure that behaviour remains the same as `ActiveRecord::Base` when no attributes are defined
+
 # 0.1.4
 
 - Fix overwriting of attributes in classes that share the same ancestor

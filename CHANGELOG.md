@@ -1,4 +1,4 @@
-# TBA
+# 0.1.4
 
 - Fix overwriting of attributes in classes that share the same ancestor
 

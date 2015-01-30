@@ -6,10 +6,32 @@ require "storext/instance_methods"
 
 module Storext
 
+  def self.model(options={})
+    mod = Module.new do
+      mattr_accessor :storext_options
+
+      def self.included(base)
+        base.class_attribute :storext_options
+        base.storext_options = self.storext_options
+        base.send :include, Storext
+      end
+    end
+
+    mod.storext_options = options
+
+    mod
+  end
+
   extend ActiveSupport::Concern
 
   included do
     include InstanceMethods
+
+    unless respond_to?(:storext_options)
+      warn "Storext must be included via `include Storext.model` instead. Not specifying `.model` has been deprecated. (included from #{self.to_s})"
+      class_attribute :storext_options
+      self.storext_options = {}
+    end
 
     class_attribute :store_attribute_defs
     self.store_attribute_defs = {}
@@ -19,6 +41,12 @@ module Storext
     end
 
     after_initialize :set_storext_defaults
+
+    self.storext_options.each do |column, default|
+      self.send :define_method, column do
+        self.read_attribute(column) || default
+      end
+    end
   end
 
 end

@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Storext do
 
+  it "can import with preferences" do
+    coffee = Coffee.new(name: "Arabica")
+    expect(coffee.name).to eq "Arabica"
+  end
+
   describe ".store_attributes" do
     it "allows definition of multiple attributes" do
       book = Book.create

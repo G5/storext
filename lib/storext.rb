@@ -6,6 +6,14 @@ require "storext/instance_methods"
 
 module Storext
 
+  def self.model(*options)
+    mod = Module.new do
+      def self.included(base)
+        base.send :include, Storext
+      end
+    end
+  end
+
   extend ActiveSupport::Concern
 
   included do

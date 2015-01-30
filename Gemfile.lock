@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    storext (0.2.0)
+    storext (0.2.1)
       rails (~> 4.0)
       virtus
 

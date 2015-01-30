@@ -1,4 +1,4 @@
-# TBA
+# 0.2.1
 
 - Fix issue where columm default was being overridden
 

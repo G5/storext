@@ -1,6 +1,5 @@
-class Phone < ActiveRecord::Base
+class FlipPhone < Phone
 
-  include Storext.model(data: {})
   store_attributes :data do
     number String, default: "222"
   end

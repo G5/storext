@@ -2,14 +2,8 @@ require 'spec_helper'
 
 describe Storext do
 
-  it "can import with preferences" do
-    coffee = Coffee.new(name: "Arabica")
-    expect(coffee.name).to eq "Arabica"
-  end
-
   it "can set default value for the serialized column" do
     coffee = Coffee.new
-    coffee.update_attributes(data: nil)
     expect(coffee.data).to eq({})
   end
 
@@ -119,6 +113,18 @@ describe Storext do
       expect(Phone.new.number).to eq "222"
       expect(FeaturePhone.new.number).to be_nil
       expect(SmartPhone.new.number).to eq "111"
+    end
+  end
+
+  context "`include Storext` is in the parent class and defaults the column" do
+    it "does not override defaults" do
+      expect(SmartPhone.new.number).to eq "111"
+      expect(FlipPhone.new.number).to eq "222"
+    end
+
+    it "retains saved values after initialization" do
+      phone = SmartPhone.create(number: "09999")
+      expect(phone.reload.number).to eq "09999"
     end
   end
 

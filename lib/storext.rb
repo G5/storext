@@ -41,12 +41,6 @@ module Storext
     end
 
     after_initialize :set_storext_defaults
-
-    self.storext_options.each do |column, default|
-      self.send :define_method, column do
-        self.read_attribute(column) || default
-      end
-    end
   end
 
 end

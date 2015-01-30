@@ -4,6 +4,10 @@ module Storext
     private
 
     def set_storext_defaults
+      self.class.storext_options.each do |column, default|
+        self.send("#{column}=", default) if self.send(column).nil?
+      end
+
       store_attribute_defs.each do |attr, definition|
         set_storext_default_for(definition[:column], attr)
       end

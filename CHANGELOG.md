@@ -1,4 +1,4 @@
-# TBA
+# 0.2.0
 
 - Ensure that behaviour remains the same as `ActiveRecord::Base` when no attributes are defined
 - Allow options to be passed in with `include Storext.model`

@@ -29,7 +29,7 @@ Define the attributes:
 ```ruby
 class Book < ActiveRecord::Base
 
-  include Storext
+  include Storext.model
 
   # You can define attributes on the :data hstore column like this:
   store_attributes :data do
@@ -43,6 +43,14 @@ class Book < ActiveRecord::Base
   store_attribute :data, :hardcover, Boolean
   store_attribute :data, :alt_name
 
+end
+```
+
+You can also set defaults (useful when you want to default a serialized column to be an empty hash (`{}`)):
+
+```ruby
+class Book < ActiveRecord::Base
+  include Storext.model(data: {})
 end
 ```
 

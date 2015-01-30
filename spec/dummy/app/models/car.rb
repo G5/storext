@@ -1,5 +1,5 @@
 class Car < ActiveRecord::Base
 
-  include Storext
+  include Storext.model
 
 end

@@ -7,6 +7,12 @@ describe Storext do
     expect(coffee.name).to eq "Arabica"
   end
 
+  it "can set default value for the serialized column" do
+    coffee = Coffee.new
+    coffee.update_attributes(data: nil)
+    expect(coffee.data).to eq({})
+  end
+
   describe ".store_attributes" do
     it "allows definition of multiple attributes" do
       book = Book.create
@@ -55,7 +61,7 @@ describe Storext do
         self.table_name = "authors"
         self::Boolean = "Something"
 
-        include Storext
+        include Storext.model
         store_attributes :data do
           name String
         end
@@ -69,7 +75,7 @@ describe Storext do
           self.table_name = "authors"
           Boolean = "Something"
 
-          include Storext
+          include Storext.model
           store_attributes :data do
             name String
             alive Boolean

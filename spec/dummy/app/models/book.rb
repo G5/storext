@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
 
-  include Storext
+  include Storext.model
   store_attributes :data do
     author String
     title String, default: "Great Voyage"

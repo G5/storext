@@ -1,4 +1,4 @@
-# Storex
+# Storext
 
 ActiveRecord::Base.store_accessor gives you accessors specific to
 PostgreSQL's `hstore` for storing hashes into a single column

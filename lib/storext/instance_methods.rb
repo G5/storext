@@ -1,6 +1,18 @@
 module Storext
   module InstanceMethods
 
+    def destroy_key(column, attr)
+      new_value = send(column)
+      new_value.delete(attr.to_s)
+      send("#{column}=", new_value)
+    end
+
+    def destroy_keys(column, *attrs)
+      new_value = send(column)
+      attrs.each { |a| new_value.delete(a.to_s) }
+      send("#{column}=", new_value)
+    end
+
     private
 
     def set_storext_defaults

@@ -42,16 +42,16 @@ module Storext
 
     def storext_attrs_for(column)
       attrs = []
-      store_attribute_defs.each do |attr, definition|
+      storext_definitions.each do |attr, definition|
         attrs << attr if definition[:column] == column
       end
       attrs
     end
 
     def track_store_attribute(column, attr, type, opts)
-      self.store_attribute_defs = self.store_attribute_defs.dup
+      self.storext_definitions = self.storext_definitions.dup
 
-      store_attribute_defs[attr] = {
+      storext_definitions[attr] = {
         column: column,
         type: type,
         opts: opts,

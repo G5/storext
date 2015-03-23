@@ -33,8 +33,8 @@ module Storext
       self.storext_options = {}
     end
 
-    class_attribute :store_attribute_defs
-    self.store_attribute_defs = {}
+    class_attribute :storext_definitions
+    self.storext_definitions = {}
 
     unless defined?(self::Boolean)
       self::Boolean = ::Axiom::Types::Boolean

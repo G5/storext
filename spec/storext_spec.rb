@@ -36,6 +36,16 @@ describe Storext do
     end
   end
 
+  describe ".storext_definitions" do
+    it "is a hash of attribute definitions" do
+      expect(Book.storext_definitions[:title]).to eq({
+        column: :data,
+        type: String,
+        opts: { default: "Great Voyage" }
+      })
+    end
+  end
+
   it "does not leak definitions into other classes" do
     author = Author.new(name: "A. Clarke")
     book = Book.new

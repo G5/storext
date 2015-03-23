@@ -54,6 +54,15 @@ class Book < ActiveRecord::Base
 end
 ```
 
+You can get a hash that lists the defined storext attributes by doing
+
+```ruby
+Book.storext_definitions
+# => { author: { column: :data, type: 'String' }, ..., }
+```
+
+Check `spec/storext_spec.rb` for more details.
+
 ## How to run the test suite
 
 1. Copy and edit `spec/dummy/config/database.yml.sample` to `spec/dummy/config/database.yml` to fit your own PostgreSQL databases

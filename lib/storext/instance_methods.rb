@@ -1,6 +1,18 @@
 module Storext
   module InstanceMethods
 
+    def destroy_key(column, attr)
+      new_value = send(column)
+      new_value.delete(attr.to_s)
+      send("#{column}=", new_value)
+    end
+
+    def destroy_keys(column, *attrs)
+      new_value = send(column)
+      attrs.each { |a| new_value.delete(a.to_s) }
+      send("#{column}=", new_value)
+    end
+
     private
 
     def set_storext_defaults
@@ -8,7 +20,7 @@ module Storext
         self.send("#{column}=", default) if self.send(column).nil?
       end
 
-      store_attribute_defs.each do |attr, definition|
+      storext_definitions.each do |attr, definition|
         set_storext_default_for(definition[:column], attr)
       end
     end
@@ -35,8 +47,8 @@ module Storext
 
         klass.attribute(
           "casted_attr",
-          self.class.store_attribute_defs[attr][:type],
-          self.class.store_attribute_defs[attr][:opts],
+          self.class.storext_definitions[attr][:type],
+          self.class.storext_definitions[attr][:opts],
         )
 
         @storext_cast_proxies[attr] = klass.new

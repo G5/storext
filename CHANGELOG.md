@@ -1,3 +1,7 @@
+# 1.0.0
+
+- Expose class method `storext_definitions` to list defined Storext attributes
+
 # 0.2.1
 
 - Fix issue where columm default was being overridden

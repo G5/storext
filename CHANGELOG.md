@@ -1,4 +1,4 @@
-# TBA
+# 1.0.2
 
 - Apply fix in `1.0.1` to `destroy_keys`
 

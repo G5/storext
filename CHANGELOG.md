@@ -1,3 +1,7 @@
+# TBA
+
+- Apply fix in `1.0.1` to `destroy_keys`
+
 # 1.0.1
 
 - Fix bug when deleting keys

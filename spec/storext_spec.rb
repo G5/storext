@@ -165,6 +165,17 @@ describe Storext do
       book.reload
       expect(book.data).to have_key("author")
     end
+
+    it "updates the changes when saved" do
+      book = Book.create
+      book.data = {'hulla' => 'balloo'}
+      book.save
+      expect(book.data['hulla']).to eq 'balloo'
+      book.destroy_key(:data, :hulla)
+      book.save
+      book.reload
+      expect(book.data).to_not have_key("hulla")
+    end
   end
 
   describe ".destroy_keys" do

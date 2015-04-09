@@ -1,3 +1,7 @@
+# TBA
+
+- Fix bug when deleting keys
+
 # 1.0.0
 
 - Expose class method `storext_definitions` to list defined Storext attributes

@@ -12,6 +12,9 @@ module Storext
 
     def destroy_keys(column, *attrs)
       new_value = send(column)
+      if Rails.gem_version < Gem::Version.new("4.2.0")
+        new_value = send(column).dup
+      end
       attrs.each { |a| new_value.delete(a.to_s) }
       send("#{column}=", new_value)
     end

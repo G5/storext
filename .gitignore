@@ -9,3 +9,4 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/config/database.yml
 tmp
+gemfiles/*.lock

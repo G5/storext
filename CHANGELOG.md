@@ -1,4 +1,4 @@
-# TBA
+# 1.0.1
 
 - Fix bug when deleting keys
 

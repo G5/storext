@@ -34,6 +34,16 @@ describe Storext do
       author = Author.new(name: "A. Clarke")
       expect(author.name).to eq "A. Clarke"
     end
+
+    it "can access methods as its default" do
+      book = Book.new
+      expect(book.preface).to eq "Write something"
+    end
+
+    it "can properly execute a lambda to compute the default" do
+      book = Book.new
+      expect(book.isbn).to eq "Computed ISBN"
+    end
   end
 
   describe ".storext_definitions" do

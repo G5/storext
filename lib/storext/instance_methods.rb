@@ -38,7 +38,7 @@ module Storext
     end
 
     def default_store_value(attr)
-      storext_cast_proxy(attr).send("casted_attr")
+      storext_cast_proxy(attr).send(attr)
     end
 
     def storext_cast_proxy(attr)
@@ -47,18 +47,39 @@ module Storext
       else
         @storext_cast_proxies ||= {}
 
-        klass = Class.new do
-          include Virtus.model
-        end
+        definition = self.class.storext_definitions[attr]
+        klass = storext_create_proxy_class(attr, definition)
 
-        klass.attribute(
-          "casted_attr",
-          self.class.storext_definitions[attr][:type],
-          self.class.storext_definitions[attr][:opts],
-        )
-
-        @storext_cast_proxies[attr] = klass.new
+        @storext_cast_proxies[attr] = klass.new(source: self)
       end
+    end
+
+    def storext_create_proxy_class(attr, definition)
+      klass = Class.new do
+        include Virtus.model
+
+        attribute :source
+      end
+
+      klass.attribute(
+        attr,
+        definition[:type],
+        definition[:opts].merge(default: :compute_default),
+      )
+
+      klass.send :define_method, :compute_default do
+        default_value = definition[:opts][:default]
+        if default_value.is_a?(Symbol)
+          source.send(default_value)
+        elsif default_value.respond_to?(:call)
+          attribute = self.class.attribute_set[attr]
+          default_value.call(source, attribute)
+        else
+          default_value
+        end
+      end
+
+      klass
     end
 
   end

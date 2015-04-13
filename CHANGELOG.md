@@ -1,3 +1,7 @@
+# 1.0.3
+
+- Fix how defaults are computed [#7](https://github.com/G5/storext/issues/7)
+
 # 1.0.2
 
 - Apply fix in `1.0.1` to `destroy_keys`

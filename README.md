@@ -18,7 +18,7 @@ so you can pass options that is accepted by [Virtus::Extensions#attribute](https
 
 ## Installation
 
-Just add `gem 'storex'` in your Gemfile and `bundle install`.
+Just add `gem 'storext'` in your Gemfile and `bundle install`.
 
 ## Usage
 

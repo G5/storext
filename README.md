@@ -1,20 +1,16 @@
 # Storext
 
-ActiveRecord::Base.store_accessor gives you accessors specific to
-PostgreSQL's `hstore` for storing hashes into a single column
-(See [ActiveRecord::Store][active_record_store]).
+`ActiveRecord::Store` allows you to put data, like a hash, in a single column. The problem is that when you retrieve these values, they are strings. Storext aims to solve that. This is a layer on top of `ActiveRecord::Store` that uses Virtus to typecast the values and add other options like:
 
-Storex builds on top of that so that you can define more options such as:
 * default values
 * type (`String`, `Integer`)
 
-Currently this gem uses [virtus](see https://github.com/solnic/virtus)
-so you can pass options that is accepted by [Virtus::Extensions#attribute](https://github.com/solnic/virtus#using-virtus-with-classes)
+Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you can pass options that is accepted by [Virtus::Extensions#attribute](https://github.com/solnic/virtus#using-virtus-with-classes)
 
 ## Dependencies
-  * PostgreSQL
-  * ruby 2.1 (but may work on earlier versions)
-  * rails 4.0
+
+  * >= Rails 3.2.1 (only tested with 4.x)
+  * Virtus
 
 ## Installation
 
@@ -61,6 +57,19 @@ Book.storext_definitions
 # => { author: { column: :data, type: 'String' }, ..., }
 ```
 
+Not using `hstore`? You can still have serialized columns using `ActiveRecord::Store`.
+
+```
+class User < ActiveRecord::Base
+  include Storext.model
+  store :settings, coder: JSON
+
+  store_attributes :settings do
+    number_of_strikes Integer, default: 0
+  end
+end
+```
+
 Check `spec/storext_spec.rb` for more details.
 
 ## How to run the test suite
@@ -71,7 +80,7 @@ Check `spec/storext_spec.rb` for more details.
 
 ## License
 
-Copyright (c) 2014 G5
+Copyright (c) 2015 G5
 
 MIT License
 

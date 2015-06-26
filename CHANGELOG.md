@@ -1,3 +1,7 @@
+# TBA
+
+- Add `#storext_has_key?` to check if a column has a key, but do so with indifferent access. When using PostgreSQL's hstore, the column's keys are strings.
+
 # 1.0.3
 
 - Fix how defaults are computed [#7](https://github.com/G5/storext/issues/7)

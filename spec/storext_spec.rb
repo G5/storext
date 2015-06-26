@@ -211,4 +211,12 @@ describe Storext do
     end
   end
 
+  describe "#storext_has_key?(column, attr)" do
+    it "is indifferent to key (string or symbol)" do
+      book = Book.create(author: "Lola")
+      expect(book.storext_has_key?(:data, :author)).to be true
+      expect(book.storext_has_key?(:data, 'author')).to be true
+    end
+  end
+
 end

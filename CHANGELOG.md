@@ -1,4 +1,4 @@
-# TBA
+# 1.1.0
 
 - Add `#storext_has_key?` to check if a column has a key, but do so with indifferent access. When using PostgreSQL's hstore, the column's keys are strings.
 

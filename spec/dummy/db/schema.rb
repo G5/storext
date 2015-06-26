@@ -17,24 +17,24 @@ ActiveRecord::Schema.define(version: 20150130013803) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "authors", force: true do |t|
+  create_table "authors", force: :cascade do |t|
     t.hstore "data"
   end
 
-  create_table "books", force: true do |t|
+  create_table "books", force: :cascade do |t|
     t.hstore "data"
     t.hstore "another_hstore"
   end
 
-  create_table "cars", force: true do |t|
+  create_table "cars", force: :cascade do |t|
     t.hstore "data"
   end
 
-  create_table "coffees", force: true do |t|
+  create_table "coffees", force: :cascade do |t|
     t.hstore "data"
   end
 
-  create_table "phones", force: true do |t|
+  create_table "phones", force: :cascade do |t|
     t.hstore "data"
   end
 

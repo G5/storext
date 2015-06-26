@@ -19,6 +19,10 @@ module Storext
       send("#{column}=", new_value)
     end
 
+    def storext_has_key?(column, key)
+      send(column).with_indifferent_access.has_key?(key)
+    end
+
     private
 
     def set_storext_defaults

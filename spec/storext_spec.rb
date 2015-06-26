@@ -167,7 +167,7 @@ describe Storext do
     expect(Book.last.title).to eq "Sis boom ba"
   end
 
-  describe ".destroy_key" do
+  describe "#destroy_key" do
     it "removes the key from the instance and does not save" do
       book = Book.create(author: "Chico's")
       book.destroy_key(:data, :author)
@@ -188,7 +188,7 @@ describe Storext do
     end
   end
 
-  describe ".destroy_keys" do
+  describe "#destroy_keys" do
     it "removes the keys from the instance and does not save" do
       book = Book.create(author: "Chico's", title: "Go-go")
       book.destroy_keys(:data, :author, :title)
@@ -208,6 +208,14 @@ describe Storext do
       book.save
       book.reload
       expect(book.data).to_not include("hulla", "foo")
+    end
+  end
+
+  describe "#storext_has_key?(column, attr)" do
+    it "is indifferent to key (string or symbol)" do
+      book = Book.create(author: "Lola")
+      expect(book.storext_has_key?(:data, :author)).to be true
+      expect(book.storext_has_key?(:data, 'author')).to be true
     end
   end
 

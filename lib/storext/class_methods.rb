@@ -38,6 +38,38 @@ module Storext
       AttributeProxy.new(self, column, &block).define_store_attribute
     end
 
+    def storext_create_proxy_class(attr)
+      definition = storext_definitions[attr]
+      proxy_class = definition[:proxy_class]
+      return proxy_class if proxy_class
+
+      proxy_class = Class.new do
+        include Virtus.model
+        attribute :source
+      end
+
+      proxy_class.attribute(
+        attr,
+        definition[:type],
+        definition[:opts].merge(default: :compute_default),
+      )
+
+      proxy_class.send :define_method, :compute_default do
+        default_value = definition[:opts][:default]
+        if default_value.is_a?(Symbol)
+          source.send(default_value)
+        elsif default_value.respond_to?(:call)
+          attribute = self.class.attribute_set[attr]
+          default_value.call(source, attribute)
+        else
+          default_value
+        end
+      end
+
+      storext_definitions[attr][:proxy_class] = proxy_class
+      proxy_class
+    end
+
     private
 
     def storext_attrs_for(column)

@@ -48,7 +48,7 @@ describe Storext do
 
   describe ".storext_definitions" do
     it "is a hash of attribute definitions" do
-      expect(Book.storext_definitions[:title]).to eq({
+      expect(Book.storext_definitions[:title]).to include({
         column: :data,
         type: String,
         opts: { default: "Great Voyage" }
@@ -217,6 +217,13 @@ describe Storext do
       expect(book.storext_has_key?(:data, :author)).to be true
       expect(book.storext_has_key?(:data, 'author')).to be true
     end
+  end
+
+  it "does not create new proxy classes for each instance" do
+    Book.create
+    total_class_count = ObjectSpace.count_objects[:T_CLASS]
+    Book.create
+    expect(ObjectSpace.count_objects[:T_CLASS]).to eq total_class_count
   end
 
 end

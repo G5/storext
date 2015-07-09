@@ -3,10 +3,7 @@ module Storext
 
     def storext_define_writer(column, attr)
       define_method "#{attr}=" do |value|
-        storext_cast_proxy(attr).send("#{attr}=", value)
         send("#{column}=", send(column) || {})
-
-        attr_value = storext_cast_proxy(attr).send(attr)
         write_store_attribute column, attr, value
         send(column)[attr.to_s] = value
       end
@@ -16,9 +13,9 @@ module Storext
       define_method attr do
         if send(column) && send(column).has_key?(attr.to_s)
           store_val = read_store_attribute(column, attr)
-          storext_cast_proxy(attr).send("#{attr}=", store_val)
+          storext_cast_proxy.send("#{attr}=", store_val)
         end
-        storext_cast_proxy(attr).send("#{attr}")
+        storext_cast_proxy.send("#{attr}")
       end
     end
 
@@ -32,10 +29,41 @@ module Storext
     def storext_define_accessor(column, attr)
       storext_define_writer(column, attr)
       storext_define_reader(column, attr)
+      storext_define_proxy_attribute(attr)
     end
 
     def store_attributes(column, &block)
       AttributeProxy.new(self, column, &block).define_store_attribute
+    end
+
+    def storext_define_proxy_attribute(attr)
+      compute_default_method_name = :"compute_default_#{attr}"
+      definition = self.storext_definitions[attr]
+      proxy_class = self.storext_proxy_class
+      proxy_class.attribute(
+        attr,
+        definition[:type],
+        definition[:opts].merge(default: compute_default_method_name),
+      )
+
+      proxy_class.send :define_method, compute_default_method_name do
+        default_value = definition[:opts][:default]
+        if default_value.is_a?(Symbol)
+          source.send(default_value)
+        elsif default_value.respond_to?(:call)
+          attribute = self.class.attribute_set[attr]
+          default_value.call(source, attribute)
+        else
+          default_value
+        end
+      end
+    end
+
+    def storext_proxy_class
+      Storext.proxy_classes[self] ||= Class.new(*Storext.proxy_classes[self.superclass]) do
+        include Virtus.model
+        attribute :source
+      end
     end
 
     private

@@ -1,10 +1,14 @@
 require "active_support/concern"
+require "active_support/core_ext/module/attribute_accessors"
 require "virtus"
 require "storext/attribute_proxy"
 require "storext/class_methods"
 require "storext/instance_methods"
 
 module Storext
+
+  mattr_accessor :proxy_classes
+  self.proxy_classes ||= {}
 
   def self.model(options={})
     mod = Module.new do

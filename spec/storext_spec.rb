@@ -219,7 +219,7 @@ describe Storext do
     end
   end
 
-  it "creates only one proxy class per storext attribute" do
+  it "does not create new proxy classes for each instance" do
     Book.create
     total_class_count = ObjectSpace.count_objects[:T_CLASS]
     Book.create

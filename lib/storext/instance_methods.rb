@@ -42,17 +42,11 @@ module Storext
     end
 
     def default_store_value(attr)
-      storext_cast_proxy(attr).send(attr)
+      storext_cast_proxy.send(attr)
     end
 
-    def storext_cast_proxy(attr)
-      if @storext_cast_proxies && @storext_cast_proxies[attr]
-        return @storext_cast_proxies[attr]
-      else
-        @storext_cast_proxies ||= {}
-        klass = self.class.storext_create_proxy_class(attr)
-        @storext_cast_proxies[attr] = klass.new(source: self)
-      end
+    def storext_cast_proxy
+      @storext_cast_proxy ||= self.class.storext_proxy_class.new(source: self)
     end
 
   end

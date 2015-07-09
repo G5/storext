@@ -1,4 +1,4 @@
-# TBA
+# 1.1.1
 
 - Attempt to address memory leak issues by conservatively creating proxy classes and instances that convert values
 

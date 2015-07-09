@@ -48,13 +48,14 @@ module Storext
         attribute :source
       end
 
+      compute_default_method_name = :"compute_default_#{attr}"
       proxy_class.attribute(
         attr,
         definition[:type],
-        definition[:opts].merge(default: :compute_default),
+        definition[:opts].merge(default: compute_default_method_name),
       )
 
-      proxy_class.send :define_method, :compute_default do
+      proxy_class.send :define_method, compute_default_method_name do
         default_value = definition[:opts][:default]
         if default_value.is_a?(Symbol)
           source.send(default_value)

@@ -23,6 +23,28 @@ module Storext
       send(column).with_indifferent_access.has_key?(key)
     end
 
+    def storext_increment(attr, by = 1)
+      new_value = send(attr) || 0
+      new_value += by
+      send("#{attr}=", new_value)
+      self
+    end
+
+    def storext_increment!(attr, by = 1)
+      storext_increment(attr, by).update_attribute(attr, send(attr))
+    end
+
+    def storext_decrement(attr, by = 1)
+      new_value = send(attr) || 0
+      new_value -= by
+      send("#{attr}=", new_value)
+      self
+    end
+
+     def storext_decrement!(attr, by = 1)
+      storext_decrement(attr, by).update_attribute(attr, send(attr))
+    end
+
     private
 
     def set_storext_defaults

@@ -226,4 +226,70 @@ describe Storext do
     expect(ObjectSpace.count_objects[:T_CLASS]).to eq total_class_count
   end
 
+  describe "#storext_increment" do
+    it "increments an integer attribute" do
+      book = Book.create
+      expect(book.copies).to eq(0)
+      book.storext_increment(:copies)
+      expect(book.copies).to eq(1)
+    end
+
+    it "does not save the record" do
+      book = Book.create
+      book.storext_increment(:copies)
+      book.reload
+      expect(book.copies).to eq(0)
+    end
+
+    it "is indifferent to key (string or symbol)" do
+      book = Book.create
+      book.storext_increment('copies')
+      book.storext_increment(:copies)
+      expect(book.copies).to eq(2)
+    end
+  end
+
+  describe "#storext_increment!" do
+    it "increments an integer and saves the record" do
+      book = Book.create
+      expect(book.copies).to eq(0)
+      book.storext_increment!(:copies)
+      book.reload
+      expect(book.copies).to eq(1)
+    end
+  end
+
+  describe "#storext_decrement" do
+    it "decrements an integer attribute" do
+      book = Book.create
+      expect(book.copies).to eq(0)
+      book.storext_decrement(:copies)
+      expect(book.copies).to eq(-1)
+    end
+
+    it "does not save the record" do
+      book = Book.create
+      book.storext_decrement(:copies)
+      book.reload
+      expect(book.copies).to eq(0)
+    end
+
+    it "is indifferent to key (string or symbol)" do
+      book = Book.create
+      book.storext_decrement('copies')
+      book.storext_decrement(:copies)
+      expect(book.copies).to eq(-2)
+    end
+  end
+
+  describe "#storext_decrement!" do
+    it "decrements an integer and saves the record" do
+      book = Book.create
+      expect(book.copies).to eq(0)
+      book.storext_decrement!(:copies)
+      book.reload
+      expect(book.copies).to eq(-1)
+    end
+  end
+
 end

@@ -44,6 +44,14 @@ describe Storext do
       book = Book.new
       expect(book.isbn).to eq "Computed ISBN"
     end
+
+    it "does not redefine existing store accessors" do
+      expect(Book).
+        to receive(:store_accessor).
+        with(:data, :new_attr)
+
+      Book.store_attribute :data, :new_attr, String
+    end
   end
 
   describe ".storext_definitions" do

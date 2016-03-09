@@ -23,7 +23,7 @@ module Storext
       track_store_attribute(column, attr, type, opts)
       storext_check_attr_validity(attr, type, opts)
       storext_define_accessor(column, attr)
-      store_accessor column, *storext_attrs_for(column)
+      store_accessor(column, attr)
     end
 
     def storext_define_accessor(column, attr)

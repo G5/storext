@@ -44,6 +44,22 @@ describe Storext do
       book = Book.new
       expect(book.isbn).to eq "Computed ISBN"
     end
+
+    it "can properly coerce truthy boolean values" do
+      book = Book.new
+      book.hardcover = "1"
+
+      expect(book.data['hardcover']).to eq true
+      expect(book.hardcover).to eq true
+    end
+
+    it "can properly coerce falsey boolean values" do
+      book = Book.new
+      book.hardcover = "0"
+
+      expect(book.data['hardcover']).to eq false
+      expect(book.hardcover).to eq false
+    end
   end
 
   describe ".storext_definitions" do

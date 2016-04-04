@@ -3,9 +3,11 @@ module Storext
 
     def storext_define_writer(column, attr)
       define_method "#{attr}=" do |value|
+        coerced_value = storext_cast_proxy.send("#{attr}=", value)
+
         send("#{column}=", send(column) || {})
-        write_store_attribute column, attr, value
-        send(column)[attr.to_s] = value
+        write_store_attribute column, attr, coerced_value
+        send(column)[attr.to_s] = coerced_value
       end
     end
 

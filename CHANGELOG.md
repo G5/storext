@@ -1,3 +1,8 @@
+# Unreleased
+## Changed
+
+- Store the coerced values in the database. This may introduce a breaking change if one by-passes the reader method provided by `ActiveRecord::Store`. https://github.com/G5/storext/pull/17
+
 # 1.1.2
 
 - Refactor ClassMethods#store_attribute to call store_accessor only with the key to be added, instead of including existing keys.

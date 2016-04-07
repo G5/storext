@@ -59,7 +59,7 @@ Book.storext_definitions
 
 Not using `hstore`? You can still have serialized columns using `ActiveRecord::Store`.
 
-```
+```ruby
 class User < ActiveRecord::Base
   include Storext.model
   store :settings, coder: JSON

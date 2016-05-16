@@ -242,4 +242,10 @@ describe Storext do
     expect(ObjectSpace.count_objects[:T_CLASS]).to eq total_class_count
   end
 
+  it "does not blow up when `select` is specified and does not include the serialized column" do
+    Book.create
+    book = Book.select(:id)
+    expect { book.inspect }.to_not raise_error
+  end
+
 end

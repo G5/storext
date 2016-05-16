@@ -1,7 +1,9 @@
 # Unreleased
 ## Changed
-
 - Store the coerced values in the database. This may introduce a breaking change if one by-passes the reader method provided by `ActiveRecord::Store`. https://github.com/G5/storext/pull/17
+
+## Fixed
+- Do not blow up when `select` is used and the serialized column is not included https://github.com/G5/storext/issues/19
 
 # 1.1.2
 

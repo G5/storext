@@ -36,6 +36,7 @@ module Storext
     end
 
     def set_storext_default_for(column, attr)
+      return unless self.respond_to?(column)
       if self.send(column).nil? || !self.send(column).has_key?(attr.to_s)
         write_store_attribute(column, attr, default_store_value(attr))
       end

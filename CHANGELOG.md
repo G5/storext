@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.0.0]
 ### Changed
 - Store the coerced values in the database. This may introduce a breaking change if one by-passes the reader method provided by `ActiveRecord::Store`. https://github.com/G5/storext/pull/17
 

@@ -27,6 +27,7 @@ module Storext
 
     def set_storext_defaults
       self.class.storext_options.each do |column, default|
+        next unless self.respond_to?(column)
         self.send("#{column}=", default) if self.send(column).nil?
       end
 

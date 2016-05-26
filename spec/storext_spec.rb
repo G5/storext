@@ -242,10 +242,21 @@ describe Storext do
     expect(ObjectSpace.count_objects[:T_CLASS]).to eq total_class_count
   end
 
-  it "does not blow up when `select` is specified and does not include the serialized column" do
-    Book.create
-    book = Book.select(:id)
-    expect { book.inspect }.to_not raise_error
-  end
+  describe "calling select on model" do
+    context "when no default is given for the store attribute" do
+      it "does not blow up when `select` is specified and does not include the serialized column" do
+        Book.create
+        book = Book.select(:id)
+        expect { book.inspect }.to_not raise_error
+      end
+    end
 
+    context "when a default is given for the store attribute" do
+      it "does not blow up when `select` is specified and does not include the serialized column" do
+        Phone.create
+        phone = Phone.select(:id)
+        expect { phone.inspect }.to_not raise_error
+      end
+    end
+  end
 end

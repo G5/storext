@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## [2.0.1] - 2016-05-26
 ### Fixed
 - Do not blow up when `select` is used, serialized column is not included, and default is defined for the store column https://github.com/G5/storext/issues/21
 

@@ -82,7 +82,7 @@ Check `spec/storext_spec.rb` for more details.
 
 ## License
 
-Copyright (c) 2015 G5
+Copyright (c) 2016 G5
 
 MIT License
 

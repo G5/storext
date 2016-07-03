@@ -14,7 +14,9 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |c|
   c.before :suite do
-    DatabaseCleaner.clean_with :truncation
+    DatabaseCleaner.clean_with(:truncation, {
+      except: %w(public.ar_internal_metadata),
+    })
   end
 
   c.before do

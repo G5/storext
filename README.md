@@ -9,7 +9,7 @@ Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you ca
 
 ## Dependencies
 
-  * >= Rails 3.2.1 (only tested with 4.x)
+  * Rails 4.x, 5.x
   * Virtus
 
 ## Installation

@@ -1,5 +1,7 @@
 # Storext
 
+[![Build Status](https://travis-ci.org/G5/storext.svg?branch=master)](https://travis-ci.org/G5/storext)
+
 `ActiveRecord::Store` allows you to put data, like a hash, in a single column. The problem is that when you retrieve these values, they are strings. Storext aims to solve that. This is a layer on top of `ActiveRecord::Store` that uses Virtus to typecast the values and add other options like:
 
 * default values
@@ -9,7 +11,7 @@ Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you ca
 
 ## Dependencies
 
-  * >= Rails 3.2.1 (only tested with 4.x)
+  * Rails 4.x, 5.x
   * Virtus
 
 ## Installation

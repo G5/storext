@@ -21,6 +21,13 @@ module Storext
       end
     end
 
+    def storext_define_predicater(column, attr)
+      define_method "#{attr}?" do
+        return false unless send(column) && send(column).has_key?(attr.to_s)
+        !!read_store_attribute(column, attr)
+      end
+    end
+
     def store_attribute(column, attr, type=nil, opts={})
       track_store_attribute(column, attr, type, opts)
       storext_check_attr_validity(attr, type, opts)
@@ -31,6 +38,7 @@ module Storext
     def storext_define_accessor(column, attr)
       storext_define_writer(column, attr)
       storext_define_reader(column, attr)
+      storext_define_predicater(column, attr)
       storext_define_proxy_attribute(attr)
     end
 

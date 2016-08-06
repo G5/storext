@@ -60,6 +60,19 @@ describe Storext do
       expect(book.data['hardcover']).to eq false
       expect(book.hardcover).to eq false
     end
+
+    it "can access predicater methods for all attributes (with or without defaults)" do
+      book = Book.new
+      book.preface = nil
+      book.alt_name = "Great Travel"
+
+      expect(book.author?).to eq false      # no default
+      expect(book.available?).to eq true    # true als default
+      expect(book.title?).to eq true        # "Great Voyage" as default
+      expect(book.copies?).to eq true       # 0 as default
+      expect(book.preface?).to eq false     # set to nil above
+      expect(book.alt_name?).to eq true     # set to "Great Travel" above
+    end
   end
 
   describe ".storext_definitions" do

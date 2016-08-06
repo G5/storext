@@ -7,7 +7,7 @@
 * default values
 * type (`String`, `Integer`)
 
-Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you can pass options that is accepted by [Virtus::Extensions#attribute](https://github.com/solnic/virtus#using-virtus-with-classes)
+Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you can pass options that are accepted by [Virtus::Extensions#attribute](https://github.com/solnic/virtus#using-virtus-with-classes)
 
 ## Dependencies
 

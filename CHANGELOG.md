@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Predicater methods (attributes with `?` at the end that return either `true` or `false`)
+
 ## [2.1.0] - 2016-07-03
 ### Added
 - Rails 5 support

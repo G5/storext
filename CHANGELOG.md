@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.2.0] - 2016-08-06
 ### Added
 - Predicater methods (attributes with `?` at the end that return either `true` or `false`)
 

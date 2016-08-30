@@ -76,9 +76,19 @@ Check `spec/storext_spec.rb` for more details.
 
 ## How to run the test suite
 
-1. Copy and edit `spec/dummy/config/database.yml.sample` to `spec/dummy/config/database.yml` to fit your own PostgreSQL databases
-2. From `spec/dummy`, `rake db:migrate db:test:prepare`
-2. From the root dir of the gem, `rspec spec`
+- Copy `spec/dummy/config/database.yml.sample` to `spec/dummy/config/database.yml`
+- If you use docker:
+  - `docker-compose build`
+  - `docker-compose run test bundle`
+  - `docker-compose run test bundle exec appraisal install`
+  - `docker-compose run test bundle exec rake --rakefile spec/dummy/Rakefile db:schema:load`
+  - `docker-compose run test bundle exec appraisal`
+- If you are not using docker:
+  - Setup your PG database, and fill in the correct credentials in `spec/dummy/config/database.yml`
+  - From `spec/dummy`, `rake db:migrate db:test:prepare`
+  - `bundle install`
+  - `appraisal install`
+  - From the root dir of the gem, `rspec spec`
 
 ## License
 

@@ -1,12 +1,14 @@
-default: &default
+# The following works out of the box if you use docker
+---
+development: &default
   adapter: postgresql
-  username: user
-  password: pass
-
-development:
-  <<: *default
-  database: storext_development
+  encoding: unicode
+  database: postgres
+  pool: 5
+  username: postgres
+  password:
+  host: db
 
 test:
   <<: *default
-  database: storext_test
+  database: app_test

@@ -72,6 +72,9 @@ describe Storext do
       expect(book.copies?).to eq true       # 0 as default
       expect(book.preface?).to eq false     # set to nil above
       expect(book.alt_name?).to eq true     # set to "Great Travel" above
+
+      book.alt_name = ""
+      expect(book.alt_name?).to eq false     # empty string should return false
     end
   end
 

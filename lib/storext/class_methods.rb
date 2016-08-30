@@ -24,7 +24,11 @@ module Storext
     def storext_define_predicater(column, attr)
       define_method "#{attr}?" do
         return false unless send(column) && send(column).has_key?(attr.to_s)
-        !!read_store_attribute(column, attr)
+        if read_store_attribute(column, attr).is_a? String
+          !read_store_attribute(column, attr).blank?
+        else
+          !!read_store_attribute(column, attr)
+        end
       end
     end
 

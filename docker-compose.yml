@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.4
+    expose:
+      - 5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  test:
+    build: .
+    depends_on:
+      - db
+    volumes_from:
+      - bundle
+    volumes:
+      - .:/app
+      - ../:/src
+  bundle:
+    image: busybox
+    volumes:
+      - /bundle
+volumes:
+  postgres:
+  bundle:
+  src:

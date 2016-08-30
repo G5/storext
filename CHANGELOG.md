@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.2.1] - 2016-08-31
 ### Fixed
 - Predicater methods for strings returns `false` when blank
 

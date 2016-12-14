@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Fixed
+- Reset values on proxy object when keys are destroyed on a storext object. Keeping these values leads to surprising behavior. See:
+
+https://github.com/G5/storext-override/issues/8
+
 ## [2.2.1] - 2016-08-31
 ### Fixed
 - Predicater methods for strings returns `false` when blank

@@ -7,6 +7,8 @@ module Storext
         new_value = send(column).dup
       end
       new_value.delete(attr.to_s)
+      storext_cast_proxy.reset_attribute(attr)
+
       send("#{column}=", new_value)
     end
 
@@ -15,7 +17,12 @@ module Storext
       if Rails.gem_version < Gem::Version.new("4.2.0")
         new_value = send(column).dup
       end
-      attrs.each { |a| new_value.delete(a.to_s) }
+
+      attrs.each do |a|
+        new_value.delete(a.to_s)
+        storext_cast_proxy.reset_attribute(a)
+      end
+
       send("#{column}=", new_value)
     end
 

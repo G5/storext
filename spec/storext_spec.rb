@@ -208,6 +208,17 @@ describe Storext do
       expect(book.data).to have_key("author")
     end
 
+    it "clears the value from the proxy object" do
+      default_title = Book.new.title
+      book = Book.create(author: "Chico's", title: "Foo and Bar")
+
+      book.destroy_key(:data, :author)
+      expect(book.author).to be_nil
+
+      book.destroy_key(:data, :title)
+      expect(book.title).to eq default_title
+    end
+
     it "updates the changes when saved" do
       book = Book.create
       book.data = {'hulla' => 'balloo'}
@@ -229,6 +240,15 @@ describe Storext do
       book.reload
       expect(book.data).to have_key("author")
       expect(book.data).to have_key("title")
+    end
+
+    it "clears the values from the proxy object" do
+      default_title = Book.new.title
+      book = Book.create(author: "Chico's", title: "Foo and Bar")
+      book.destroy_keys(:data, :author, :title)
+
+      expect(book.author).to be_nil
+      expect(book.title).to eq default_title
     end
 
     it "updates the changes when saved" do

@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [2.2.2] - 2016-12-16
 ### Fixed
 - Reset values on proxy object when keys are destroyed on a storext object. Keeping these values leads to surprising behavior. See:
 

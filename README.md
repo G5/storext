@@ -20,7 +20,31 @@ Just add `gem 'storext'` in your Gemfile and `bundle install`.
 
 ## Usage
 
-First, make sure you can use `store_accessor` as described in the [ActiveRecord::Store][active_record_store] docs. This ensures that you have everything required to get this working correctly. [Here](https://mikecoutermarsh.com/using-hstore-with-rails-4/) is a good tutorial.
+### With jsonb (postgresql 9.4+)
+Add jsonb column. eg:
+
+```ruby
+add_column :books, :data, :jsonb, null: false, default: '{}'
+add_index :books, :data, using: :gin
+```
+[Here](http://nandovieira.com/using-postgresql-and-jsonb-with-ruby-on-rails) is a good tutorial for jsonb and rails.
+
+### With hstore (postgresql 9.2+)
+```ruby
+enable_extension 'hstore'
+add_column :books, :data, :hstore, null: false, default: '{}'
+add_index :books, :data, using: :gin
+```
+[Here](https://mikecoutermarsh.com/using-hstore-with-rails-4/) is a good tutorial for hstore and rails.
+
+
+### With Rails standard methods
+With rails and the text format there is no need for postgresql or any nosql db. You can use every db.
+```ruby
+add_column :books, :data, :text
+```
+[Here](http://api.rubyonrails.org/classes/ActiveRecord/Store.html) is the Documentation for Rails Store.
+
 
 Define the attributes:
 

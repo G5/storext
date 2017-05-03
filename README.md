@@ -109,7 +109,7 @@ Check `spec/storext_spec.rb` for more details.
   - `docker-compose run test bundle exec appraisal`
 - If you are not using docker:
   - Setup your PG database, and fill in the correct credentials in `spec/dummy/config/database.yml`
-  - From `spec/dummy`, `rake db:migrate db:test:prepare`
+  - `bundle exec rake --rakefile spec/dummy/Rakefile db:schema:load`
   - `bundle install`
   - `appraisal install`
   - From the root dir of the gem, `rspec spec`

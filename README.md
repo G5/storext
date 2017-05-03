@@ -24,7 +24,7 @@ Just add `gem 'storext'` in your Gemfile and `bundle install`.
 Add jsonb column. eg:
 
 ```ruby
-add_column :books, :data, :jsonb, null: false, default: '{}'
+add_column :books, :data, :jsonb, null: false, default: {}
 add_index :books, :data, using: :gin
 ```
 [Here](http://nandovieira.com/using-postgresql-and-jsonb-with-ruby-on-rails) is a good tutorial for jsonb and rails.
@@ -32,7 +32,7 @@ add_index :books, :data, using: :gin
 ### With hstore (postgresql 9.2+)
 ```ruby
 enable_extension 'hstore'
-add_column :books, :data, :hstore, null: false, default: '{}'
+add_column :books, :data, :hstore, null: false, default: {}
 add_index :books, :data, using: :gin
 ```
 [Here](https://mikecoutermarsh.com/using-hstore-with-rails-4/) is a good tutorial for hstore and rails.

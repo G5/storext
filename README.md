@@ -101,18 +101,11 @@ Check `spec/storext_spec.rb` for more details.
 ## How to run the test suite
 
 - Copy `spec/dummy/config/database.yml.sample` to `spec/dummy/config/database.yml`
-- If you use docker:
-  - `docker-compose build`
-  - `docker-compose run test bundle`
-  - `docker-compose run test bundle exec appraisal install`
-  - `docker-compose run test bundle exec rake --rakefile spec/dummy/Rakefile db:schema:load`
-  - `docker-compose run test bundle exec appraisal`
-- If you are not using docker:
-  - Setup your PG database, and fill in the correct credentials in `spec/dummy/config/database.yml`
-  - `bundle exec rake --rakefile spec/dummy/Rakefile db:schema:load`
-  - `bundle install`
-  - `appraisal install`
-  - From the root dir of the gem, `rspec spec`
+- Setup your PG database, and fill in the correct credentials in `spec/dummy/config/database.yml`. If you're familiar with Docker, you use the `docker-compose up db` to start the db. It will be accessible via your host's `5432` port.
+- `bundle exec rake --rakefile spec/dummy/Rakefile db:create db:schema:load`
+- `bundle install`
+- `appraisal install`
+- From the root dir of the gem, `appraisal rspec spec`
 
 ## License
 

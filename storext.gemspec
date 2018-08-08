@@ -17,10 +17,11 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", [">= 4.0", "< 6.0"]
+  s.add_dependency "activesupport", [">= 4.0", "< 6.0"]
   s.add_dependency "virtus"
 
-  s.add_development_dependency "pg"
+  s.add_development_dependency "appraisal"
+  s.add_development_dependency "pry"
   s.add_development_dependency "rspec"
   s.add_development_dependency "database_cleaner"
 end

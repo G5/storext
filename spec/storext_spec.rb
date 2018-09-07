@@ -76,6 +76,15 @@ describe Storext do
       book.alt_name = ""
       expect(book.alt_name?).to eq false     # empty string should return false
     end
+
+    it "" do
+      agent = Agent.new
+      agent.first_name = "Jason"
+      agent.last_name = ""
+      agent.save
+      expect(agent.first_name).to eq "Jason"
+      expect(agent.last_name).to eq ""
+    end
   end
 
   describe ".storext_definitions" do

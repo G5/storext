@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130013803) do
+ActiveRecord::Schema.define(version: 2018_09_07_143741) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "plpgsql"
+
+  create_table "agents", force: :cascade do |t|
+    t.jsonb "data", default: {}, null: false
+  end
 
   create_table "authors", force: :cascade do |t|
     t.hstore "data"

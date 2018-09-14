@@ -11,5 +11,3 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'pry'
-
-gem 'appraisal'

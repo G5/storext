@@ -7,3 +7,13 @@ appraise "rails_5.0.7" do
   gem "rails", "5.0.7"
   gem "pg", "~> 0.12"
 end
+
+appraise "rails_5.1.6" do
+  gem "rails", "5.1.6"
+  gem "pg", "~> 1.0"
+end
+
+appraise "rails_5.2.1" do
+  gem "rails", "5.2.1"
+  gem "pg", "~> 1.0"
+end

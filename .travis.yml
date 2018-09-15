@@ -10,4 +10,7 @@ gemfile:
   - gemfiles/rails_4.1.gemfile
   - gemfiles/rails_4.2.gemfile
   - gemfiles/rails_5.0.gemfile
+before_script:
+  - cp spec/dummy/config/database.yml{.sample,}
+  - bundle exec rake db:create db:schema:load db:test:prepare --Rakefile spec/dummy/Rakefile
 script: bundle exec rspec spec

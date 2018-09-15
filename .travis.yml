@@ -8,6 +8,3 @@ gemfile:
   - gemfiles/4.0.gemfile
   - gemfiles/4.1.gemfile
   - gemfiles/5.0.gemfile
-before_script:
-  - bundle install
-  - bundle exec appraisal install

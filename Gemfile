@@ -11,5 +11,4 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'pry'
-gem "pg"
 gem 'appraisal'

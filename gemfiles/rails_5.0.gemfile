@@ -6,4 +6,4 @@ gem "pry"
 gem "appraisal"
 gem "rails", "5.0"
 
-gemspec :path => "../"
+gemspec path: "../"

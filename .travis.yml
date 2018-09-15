@@ -8,3 +8,4 @@ gemfile:
 before_script:
   - bundle install
   - bundle exec appraisal install
+script: bundle exec rspec spec

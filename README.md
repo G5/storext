@@ -109,7 +109,7 @@ Check `spec/storext_spec.rb` for more details.
 
 ## License
 
-Copyright (c) 2017 G5
+Copyright (c) 2018 G5
 
 MIT License
 

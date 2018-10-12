@@ -275,7 +275,7 @@ describe Storext do
     Book.create
     total_class_count = ObjectSpace.count_objects[:T_CLASS]
     Book.create
-    expect(ObjectSpace.count_objects[:T_CLASS]).to eq total_class_count
+    expect(ObjectSpace.count_objects[:T_CLASS]).to be <= (total_class_count+1)
   end
 
   describe "calling select on model" do

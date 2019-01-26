@@ -7,7 +7,7 @@
 * default values
 * type (`String`, `Integer`)
 
-Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you can pass options that are accepted by [Virtus::Extensions#attribute](https://github.com/solnic/virtus#using-virtus-with-classes)
+Currently this gem uses [virtus](https://github.com/solnic/virtus) so you can pass options that are accepted by [Virtus::Extensions#attribute](https://github.com/solnic/virtus#using-virtus-with-classes)
 
 ## Dependencies
 
@@ -16,34 +16,41 @@ Currently this gem uses [virtus](see https://github.com/solnic/virtus) so you ca
 
 ## Installation
 
-Just add `gem 'storext'` in your Gemfile and `bundle install`.
+Add `gem 'storext'` to your Gemfile and `bundle install`.
 
 ## Usage
 
 ### With jsonb (postgresql 9.4+)
-Add jsonb column. eg:
+
+Add a jsonb column. e.g.:
 
 ```ruby
 add_column :books, :data, :jsonb, null: false, default: {}
 add_index :books, :data, using: :gin
 ```
-[Here](http://nandovieira.com/using-postgresql-and-jsonb-with-ruby-on-rails) is a good tutorial for jsonb and rails.
+
+["Using PostgreSQL and JSONB with Ruby on Rails"](http://nandovieira.com/using-postgresql-and-jsonb-with-ruby-on-rails) is a good tutorial for jsonb and Rails.
 
 ### With hstore (postgresql 9.2+)
+
 ```ruby
 enable_extension 'hstore'
 add_column :books, :data, :hstore, null: false, default: {}
 add_index :books, :data, using: :gin
 ```
-[Here](https://mikecoutermarsh.com/using-hstore-with-rails-4/) is a good tutorial for hstore and rails.
+
+["Using HStore with Rails 4"](https://mikecoutermarsh.com/using-hstore-with-rails-4/) is a good tutorial for hstore and Rails.
 
 
 ### With Rails standard methods
-With rails and the text format there is no need for postgresql or any nosql db. You can use every db.
+
+With Rails and the text format there is no need for postgresql or any nosql db. You can use every db.
+
 ```ruby
 add_column :books, :data, :text
 ```
-[Here](http://api.rubyonrails.org/classes/ActiveRecord/Store.html) is the Documentation for Rails Store.
+
+[ActiveRecord::Store](https://api.rubyonrails.org/classes/ActiveRecord/Store.html) is the Documentation for Rails Store.
 
 
 Define the attributes:
@@ -119,4 +126,4 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-  [active_record_store]: http://api.rubyonrails.org/classes/ActiveRecord/Store.html
+  [active_record_store]: https://api.rubyonrails.org/classes/ActiveRecord/Store.html

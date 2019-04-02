@@ -2,11 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.0.0] - 2018-04-01
 ### Added
 - Do not depend on Rails for non-development, ActiveRecord instead
 
-### Fixed
+### Changed
 - [Marshalling a model](https://github.com/G5/storext/issues/47)
 
 ## [2.2.2] - 2016-12-16

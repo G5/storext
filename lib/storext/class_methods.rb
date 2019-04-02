@@ -80,6 +80,10 @@ module Storext
       end
     end
 
+    def _load(yml)
+      YAML.load(yml)
+    end
+
     private
 
     def storext_attrs_for(column)

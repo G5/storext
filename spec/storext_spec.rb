@@ -295,4 +295,25 @@ describe Storext do
       end
     end
   end
+
+  describe "marshalling" do
+    it "can properly dump and load a non-persisted object" do
+      author = Author.new(name: "A. Clarke")
+      expect { Marshal.dump(author) }.to_not raise_error
+
+      dump = Marshal.dump(author)
+      author2 = Marshal.load(dump)
+      expect(author2.name).to eq "A. Clarke"
+    end
+
+    it "can properly dump and load a persisted object" do
+      author = Author.create(name: "A. Clarke")
+      expect { Marshal.dump(author) }.to_not raise_error
+
+      dump = Marshal.dump(author)
+      author2 = Marshal.load(dump)
+      expect(author2.name).to eq "A. Clarke"
+      expect(author2.id).to eq author.id
+    end
+  end
 end

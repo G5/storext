@@ -30,6 +30,10 @@ module Storext
       send(column).with_indifferent_access.has_key?(key)
     end
 
+    def _dump(level)
+      self.to_yaml
+    end
+
     private
 
     def set_storext_defaults

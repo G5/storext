@@ -17,3 +17,8 @@ appraise "rails_5.2.1" do
   gem "rails", "5.2.1"
   gem "pg", "~> 1.0"
 end
+
+appraise "rails_6.0.0" do
+  gem "rails", "6.0.0"
+  gem "pg", "~> 1.0"
+end

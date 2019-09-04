@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+###
+- [Rails 6 support](https://github.com/G5/storext/pull/65)
+
 ## [3.0.0] - 2018-04-01
 ### Added
 - Do not depend on Rails for non-development, ActiveRecord instead

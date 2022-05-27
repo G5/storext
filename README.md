@@ -11,7 +11,7 @@ Currently this gem uses [virtus](https://github.com/solnic/virtus) so you can pa
 
 ## Dependencies
 
-  * Rails 4.x, 5.x, 6.x
+  * Rails 4.x, 5.x, 6.x, 7.x
   * Virtus
 
 ## Installation

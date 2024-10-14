@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - 2024-10-14
+###
+- Rails 7 support
 ## [3.1.0] - 2018-09-05
 ###
 - [Rails 6 support](https://github.com/G5/storext/pull/65)
